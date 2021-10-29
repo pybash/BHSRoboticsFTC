@@ -5,6 +5,10 @@ import java.text.SimpleDateFormat
 //
 apply plugin: 'com.android.library'
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '6.7.1'
+}
+
 android {
 
     defaultConfig {

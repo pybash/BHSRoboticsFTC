@@ -63,6 +63,7 @@ public class BasicOpMode_Linear extends OpMode
     private DcMotor backwardRight = null;
     private DcMotor carouselLeft = null;
     private DcMotor carouselRight = null;
+    private DcMotor arm = null;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -91,6 +92,8 @@ public class BasicOpMode_Linear extends OpMode
 
         carouselLeft.setDirection(DcMotor.Direction.FORWARD);
         carouselRight.setDirection(DcMotor.Direction.FORWARD);
+
+        arm.setDirection(DcMotor.Direction.FORWARD);
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -143,6 +146,7 @@ public class BasicOpMode_Linear extends OpMode
             carouselRight.setPower(0);
         }
 
+        arm.setPower(gamepad2.left_stick_y);
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());

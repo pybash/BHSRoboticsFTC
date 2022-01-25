@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -63,7 +64,7 @@ public class BasicOpMode_Linear extends OpMode
     private DcMotor backwardRight = null;
     private DcMotor carouselLeft = null;
     private DcMotor carouselRight = null;
-    private DcMotor arm = null;
+    private Servo intake = null;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -82,6 +83,8 @@ public class BasicOpMode_Linear extends OpMode
 
         carouselLeft  = hardwareMap.get(DcMotor.class, "blc");
         carouselRight  = hardwareMap.get(DcMotor.class, "brc");
+
+        intake = hardwareMap.get(Servo.class, "intake");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -147,6 +150,8 @@ public class BasicOpMode_Linear extends OpMode
         }
 
         arm.setPower(gamepad2.left_stick_y);
+
+        intake.setPosition(Range.clip(gamepad2.right_stick_y, 0, 1));
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());

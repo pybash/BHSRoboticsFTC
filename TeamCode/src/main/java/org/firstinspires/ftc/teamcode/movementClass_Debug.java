@@ -13,8 +13,7 @@ import org.firstinspires.ftc.teamcode.movementClass;
 public class movementClass_Debug extends LinearOpMode {
     @Override
     public void runOpMode() {
-        movementClass mC = new movementClass();
-        mC.init(hardwareMap);
+        movementClass mC = new movementClass(hardwareMap);
 
         mC.forward(1,500);
     }

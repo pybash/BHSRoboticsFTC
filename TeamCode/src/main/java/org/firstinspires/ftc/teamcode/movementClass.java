@@ -15,27 +15,12 @@ import com.qualcomm.robotcore.hardware.HardwareDevice.*;
 
 
 public class movementClass {
-    private DcMotor forwardLeft = null;
-    private DcMotor backwardLeft = null;
-    private DcMotor forwardRight = null;
-    private DcMotor backwardRight = null;
+    private DcMotor forwardLeft, backwardLeft, forwardRight, backwardRight;
 
     HardwareMap hwMap = null;
 
-    private void PST (Exception e) {
-        e.printStackTrace();
-    }
-
-    private void sleep(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch(InterruptedException e) {
-            PST(e);
-        }
-    }
-
-    public void init(HardwareMap aHM) {
-        hwMap = aHM;
+    public movementClass(HardwareMap hardwareMap) {
+        hwMap = hardwareMap;
 
         forwardLeft  = hwMap.get(DcMotor.class, "fl");
         backwardLeft = hwMap.get(DcMotor.class, "bl");
@@ -48,6 +33,18 @@ public class movementClass {
         forwardRight.setDirection(DcMotor.Direction.REVERSE);
         backwardLeft.setDirection(DcMotor.Direction.FORWARD);
         backwardRight.setDirection(DcMotor.Direction.REVERSE);
+    }
+
+    private void PST (Exception e) {
+        e.printStackTrace();
+    }
+
+    private void sleep(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch(InterruptedException e) {
+            PST(e);
+        }
     }
 
     public void forward(double magnitude, long ms) {
